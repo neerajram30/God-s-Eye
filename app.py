@@ -32,36 +32,7 @@ def predict(img_path, knn_clf=None, model_path=None, threshold=0.6): # 6 needs 4
     return [(pred, loc) if rec else ("unknown", loc) for pred, loc, rec in zip(knn_clf.predict(faces_encodings),face_box,matches
     )]
 
-# def gen_frames():
 
-#     webcam = cv2.VideoCapture(0) #  0 to use webcam 
-#     while True:
-#     # Loop until the camera is working
-#         rval = False
-#         while(not rval):
-#         # Put the image from the webcam into 'frame'
-#             (rval, frame) = webcam.read()
-#             if(not rval):
-#                 print("Failed to open webcam. Trying again...")
-            
-#     # Flip the image (optional)
-#         frame=cv2.flip(frame,1) # 0 = horizontal ,1 = vertical , -1 = both
-#         frame_copy = cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
-#     # Convert the image from BGR color (which OpenCV uses) to RGB color (which face_recognition uses)
-#         frame_copy=cv2.cvtColor(frame_copy, cv2.COLOR_BGR2RGB)
-#         predictions = predict(frame_copy, model_path="classifier/trained_knn_model.clf")
-#         font = cv2.FONT_HERSHEY_DUPLEX
-#         for name, (top, right, bottom, left) in predictions:
-#             top *= 4 #scale back the frame since it was scaled to 1/4 in size
-#             right *= 4
-#             bottom *= 4
-#             left *= 4
-#             cv2.rectangle(frame, (left, top), (right, bottom), (0, 255, 255), 2)
-#             cv2.putText(frame, name, (left-10,top-6), font, 0.8, (255, 255, 255), 1)
-        
-#             cv2.imshow('Video', frame)
-#         if cv2.waitKey(1) & 0xFF == ord('q'):
-#             break
 camera =cv2.VideoCapture(0)
 
 def gen_frames():
@@ -98,47 +69,7 @@ def gen_frames():
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n') 
 
-            # Only process every other frame of video to save time
            
-        # Find all the faces and face encodings in the current frame of video
-            # face_locations = face_recognition.face_locations(rgb_small_frame)
-            # face_encodings = face_recognition.face_encodings(rgb_small_frame, face_locations)
-            # face_names = []
-            # for face_encoding in face_encodings:
-            #     # See if the face is a match for the known face(s)
-            #     matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
-            #     name = "Unknown"
-            #     # Or instead, use the known face with the smallest distance to the new face
-            #     face_distances = face_recognition.face_distance(known_face_encodings, face_encoding)
-            #     best_match_index = np.argmin(face_distances)
-            #     if matches[best_match_index]:
-            #         name = known_face_names[best_match_index]
-
-            #     face_names.append(name)
-            
-
-            # Display the results
-            # for (top, right, bottom, left), name in zip(face_locations, face_names):
-            #     # Scale back up face locations since the frame we detected in was scaled to 1/4 size
-            #     top *= 4
-            #     right *= 4
-            #     bottom *= 4
-            #     left *= 4
-
-            #     # Draw a box around the face
-            #     cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
-
-            #     # Draw a label with a name below the face
-            #     cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
-            #     font = cv2.FONT_HERSHEY_DUPLEX
-            #     cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
-
-            # ret, buffer = cv2.imencode('.jpg', frame)
-            # frame = buffer.tobytes()
-            # yield (b'--frame\r\n'
-            #        b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-
-
 
 @app.route('/')
 def index():
