@@ -154,9 +154,10 @@ def train():
         msg="Database error: " + e
         return render_template("newcase.html", message = msg)
     results =cur.fetchall()
-
-
-    print(results.m_name)    
+    for i in results:
+         name = i[0]
+         image = i[1]
+         print(name+image)   
     cur.close()        
     
 
