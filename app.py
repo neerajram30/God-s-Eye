@@ -108,37 +108,43 @@ def newcase():
     return render_template('newcase.html')    
 
 @app.route('/newcase', methods=['POST'])
-def casedetails():
-    
-    UPLOAD_FOLDER = 'static/uploads/'
-    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-    
-    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    if 'file' not in request.files:
-        flash('No file part')
-        return redirect(request.url)
-    file = request.files['file']
-    if file.filename == '':
-        flash('No image selected for uploading')
-        return redirect(request.url)
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        #print('upload_image filename: ' + filename)
- 
-        cursor.execute("INSERT INTO upload VALUES (%s)", (filename,))
-        conn.commit()
- 
-        flash('Image successfully uploaded and displayed below')
-        return render_template('index.html', filename=filename)
-    else:
-        flash('Allowed image types are - png, jpg, jpeg, gif')
-        return redirect(request.url)
-    return redirect('/newcase')    
+def newcase_upload():
+    m_name = request.form.get("m_name","")
+    mobile = request.form.get("mobile","")
+    location = request.form.get("location","")
+    face_img = request.form.get("face_img","")
 
-@app.route('/train', methods=['GET'] ['POST'])
-def train():
+    if m_name == "":
+        msg = "Please fill in name"
+        return render_template("newcase.html", message = msg)
+
+    if mobile == "":
+        msg = "Please fill in mobile"
+        return render_template("newcase.html", message = msg)    
+    if location == "":
+        msg = "Please fill in location"
+        return render_template("newcase.html", message = msg)
+    if face_img == "":
+        msg = "Please upload in face image"
+        return render_template("newcase.html", message = msg)
+    cur = conn.cursor()
+    cur.execute(f"INSERT INTO cases (m_name,mobile,location,face_img) VALUES('{m_name}','{mobile}','{location}','{face_img}')")
+    try:
+        conn.commit()
+    except psycopg2.Error as e:
+        msg="Database error: " + e
+        return render_template("newcase.html", message = msg)
+    cur.close()        
     
+
+    
+    
+    
+
+# @app.route('/train', methods=['GET'] ['POST'])
+# def train():
+
+#     return "some"
     
 if __name__=='__main__':
     app.run(debug=True)
