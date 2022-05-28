@@ -1,14 +1,36 @@
 
 
-from flask import Flask, render_template, Response
+import os
+from flask import Flask, render_template, Response, request, redirect, url_for, flash
+import urllib.request
 import cv2
 import face_recognition
 import numpy as np
 import pickle
 from face_recognition.face_recognition_cli import image_files_in_folder
-
-
+from werkzeug.utils import secure_filename
+import psycopg2
+import psycopg2.extras
 app=Flask(__name__)
+
+
+DB_HOST = "localhost"
+DB_NAME = "final_project"
+DB_USER = "postgres"
+DB_PASS = "12345"
+
+conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
+
+if(conn):
+    print("connection established")
+UPLOAD_FOLDER = 'static/uploads/'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+     
+
 
 def predict(img_path, knn_clf=None, model_path=None, threshold=0.6): # 6 needs 40+ accuracy, 4 needs 60+ accuracy
     if knn_clf is None and model_path is None:
@@ -74,14 +96,41 @@ def gen_frames():
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
 @app.route('/video_feed')
 def video_feed():
     return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
 @app.route('/newcase')
 def newcase():
     return render_template('newcase.html')    
 
-
+@app.route('/newcase', methods=['POST'])
+def casedetails():
+    
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    if 'file' not in request.files:
+        flash('No file part')
+        return redirect(request.url)
+    file = request.files['file']
+    if file.filename == '':
+        flash('No image selected for uploading')
+        return redirect(request.url)
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        #print('upload_image filename: ' + filename)
+ 
+        cursor.execute("INSERT INTO upload VALUES (%s)", (filename,))
+        conn.commit()
+ 
+        flash('Image successfully uploaded and displayed below')
+        return render_template('index.html', filename=filename)
+    else:
+        flash('Allowed image types are - png, jpg, jpeg, gif')
+        return redirect(request.url)
 
 
     
