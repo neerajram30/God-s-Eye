@@ -12,6 +12,7 @@ from werkzeug.utils import secure_filename
 import psycopg2
 import psycopg2.extras
 app=Flask(__name__)
+app.secret_key = "super secret key"
 
 
 DB_HOST = "localhost"
@@ -21,11 +22,10 @@ DB_PASS = "12345"
 
 conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
 
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 if(conn):
     print("connection established")
-UPLOAD_FOLDER = 'static/uploads/'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -110,6 +110,9 @@ def newcase():
 @app.route('/newcase', methods=['POST'])
 def casedetails():
     
+    UPLOAD_FOLDER = 'static/uploads/'
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     if 'file' not in request.files:
         flash('No file part')
@@ -131,8 +134,11 @@ def casedetails():
     else:
         flash('Allowed image types are - png, jpg, jpeg, gif')
         return redirect(request.url)
+    return redirect('/newcase')    
 
-
+@app.route('/train', methods=['GET'] ['POST'])
+def train():
+    
     
 if __name__=='__main__':
     app.run(debug=True)
