@@ -1,6 +1,7 @@
 
 
 import os
+from unittest import result
 from flask import Flask, render_template, Response, request, redirect, url_for, flash
 import urllib.request
 import cv2
@@ -91,6 +92,8 @@ def gen_frames():
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n') 
 
+
+
            
 
 @app.route('/')
@@ -135,16 +138,31 @@ def newcase_upload():
         msg="Database error: " + e
         return render_template("newcase.html", message = msg)
     cur.close()        
-    
+
 
     
     
     
 
-# @app.route('/train', methods=['GET'] ['POST'])
-# def train():
+@app.route('/train', methods=['GET'])
+def train():
+    cur = conn.cursor()
+    cur.execute(f"SELECT m_name,face_img FROM cases")
+    try:
+        conn.commit()
+    except psycopg2.Error as e:
+        msg="Database error: " + e
+        return render_template("newcase.html", message = msg)
+    results =cur.fetchall()
 
-#     return "some"
+
+    print(results.m_name)    
+    cur.close()        
+    
+
+
+
+    return "some"
     
 if __name__=='__main__':
     app.run(debug=True)
