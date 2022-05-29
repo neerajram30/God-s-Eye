@@ -133,11 +133,12 @@ def newcase_upload():
         return render_template("newcase.html", message = msg)
     if face_img and allowed_file(face_img.filename):
         filename = secure_filename(face_img.filename)
+        print(filename)
         face_img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))    
     cur = conn.cursor()
-    cur.execute("INSERT INTO cases (m_name, mobile, location, face_img) VALUES('{m_name}', '{mobile}', '{location}', '{face_img}')")
+    cur.execute('INSERT INTO upload (title) VALUES(%s)',(face_img,))
     try:
-        conn.commit()
+        conn.commit(cursor_factory=psycopg2.extras.DictCursor)
     except psycopg2.Error as e:
         msg="Database error: " + e
         return render_template("newcase.html", message = msg)
