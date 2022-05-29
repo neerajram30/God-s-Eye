@@ -1,0 +1,169 @@
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:700&display=swap');
+*{
+    padding:0;
+    margin: 0;
+}
+
+
+
+#myVideo 
+ {
+	
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	margin-top: -10px;
+}
+
+
+/*section
+{
+	
+}*/
+.title h1{
+	color: white;
+	margin-left: 20%;
+	width: 100%;
+}
+.navbar
+{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 75px;
+	width: 100%;
+	/* background: rgba(0,0,0,0.5); */
+	background: linear-gradient(60deg, rgba(2,0,36,1) 0%, rgba(9,8,115,0.9724264705882353) 28%, rgba(9,9,121,0.8743872549019608) 53%, rgba(0,212,255,1) 100%);
+
+}
+.logo
+{
+ width:130px;
+ height:auto;
+ padding:5px 100px;
+
+ 
+}
+
+.navbar ul{
+	float:right;
+	margin-right: 20px
+}
+.navbar ul li{
+	list-style: none;
+	margin: 0 8px;
+	display: inline-block;
+	line-height: 80px
+}
+.navbar ul li a{
+	text-decoration: none;
+	color:white;
+	font-size: 1.1em;
+	 padding: 6px 13px;
+	font-family: 'Roboto',sans-serif;
+	transform: .4s;
+}
+.navbar ul li a.active,
+.navbar ul li a:hover{
+	background: blue;
+	border-radius: 2px;
+
+}
+.life .center{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	font-family: sans-serif;
+ user-select: none;
+}
+.center h1
+{color: rgb(0, 225, 255);
+	font-size: 60px;
+	text-shadow: -1px 1px 2px #000,
+				  1px 1px 2px #000,
+				  1px -1px 0 #000,
+				  -1px -1px 0 #000;
+	
+	text-align: center;
+}
+.center h3
+{color: white;
+	font-size: 40px;
+	text-shadow: -1px 1px 2px #000,
+				  1px 1px 2px #000,
+				  1px -1px 0 #000,
+				  -1px -1px 0 #000;
+	text-align: center;
+}
+a{
+text-decoration: none;
+color:rebeccapurple;
+font-weight: bold;
+}
+.center .buttons{
+	margin: 35px 280px;
+}
+.buttons button{
+	height: 50px;
+    width:150px;
+	font-size: 18px;
+	font-weight: bold;
+	color: #ffb3b3 ;
+	background:white;
+    border:2px solid #cc0000;
+   
+	outline:none;
+	cursor: pointer;
+	border-radius: 25px;
+	transition: .5s;
+
+}
+.button.btn
+{
+	margin-left:50px;
+
+}
+.button button , hover{
+	background: #cc0000;
+}
+.footer{
+  padding:25px;
+margin-bottom: 50px;
+  color:white;
+  background-color:#181514;
+  font-weight: bold;
+  text-align: center;
+}
+#form{
+	width: 100%;
+	height:100%;
+	color: red;
+}
+body{
+	height: fit-content;
+	width: 100%;
+}
+
+table {
+	border-collapse: separate;
+	border-spacing: 1px 0;
+	background-color: white;
+	align-content: center;
+
+
+		
+  }
+/* 
+  td {
+	padding: 5px 0;
+  }
+  th {
+	padding: 5px 0;
+  }
+*/
+h2{
+	color:darkblue;
+
+}

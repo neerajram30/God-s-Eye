@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -27,5 +27,45 @@
 </div>
 
 </div>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf8">
+  <title>Police login portal</title>
+  <link rel="stylesheet" href="css/style1.css">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/style2.css') }}">  
+</head>
+<body class="life">
+
+<div class="login-box">
+    <h1>Police Login</h1>
+    
+    <form action="/login" method="post">
+    <div class="text-box">
+        <i class="fa fa-user" aria-hidden="true"></i>
+        <input type="text" name="police_id" value="" placeholder="Police id" required>
+
+    </div>
+    <div class="text-box">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <input type="text" name="p_name" value="" placeholder="Police name" required>
+    
+        </div>
+    <div class="text-box">
+        <i class="fa fa-lock" aria-hidden="true"></i>
+        <input type="text" name="password" value="" placeholder="Password" required>
+        
+    </div>
+    <input class="btn" type="submit" value="Login">
+    
+</form>
+
+<button class="btn"><a href ="/register">Register</a></button>
+                
+
 </body>
 </html>

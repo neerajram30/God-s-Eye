@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css');
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins' , sans-serif ;
+  
+}
+.life
+{
+background: rgb(2,0,36);
+background-image: linear-gradient(60deg, rgba(2,0,36,1) 0%, rgba(9,8,115,0.9724264705882353) 28%, rgba(9,9,121,0.8743872549019608) 53%, rgba(0,212,255,1) 100%);
+background-image: cover;
+}
+.navbar
+{
+    height: 80px;
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+}
+.navbar ul{
+    float:right;
+    margin-right: 20px
+}
+.navbar ul li{
+    list-style: none;
+    margin: 0 8px;
+    display: inline-block;
+    line-height: 80px
+}
+.navbar ul li a{
+    text-decoration: none;
+    color:white;
+    font-size: 20px;
+     padding: 6px 13px;
+    font-family: 'Roboto',sans-serif;
+    transform: .4s;
+}
+.navbar ul li a.active,
+.navbar ul li a:hover{
+    background-image: #D82148;
+    border-radius: 2px;
+
+}
+
+.preview{
+    margin-top: 5%;
+}
+.login-box{
+    width: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: white;
+}
+
+.btn-save{
+    width: 100px;
+    height: 30px;
+    margin-top: 3%;
+    background-color: #D82148;
+    border: #D82148;
+    color: beige;
+}
+.tit{
+    float: left;
+    font-size: 40px;
+    border-bottom: 6px solid red;
+    margin-bottom: 50px;
+    padding: 13px 0;
+}
+
+.login-box h1{
+    float: left;
+    font-size: 1.9em;
+    border-bottom: 2px solid red;
+    margin-bottom: 50px;
+    padding: 8px 0;
+}
+.text-box{
+    width: 100%;
+    overflow: hidden;
+    font-size: 1.5em;
+    padding: 8px 0;
+    margin: 8px 0;
+    border-bottom: 1px solid red;
+    
+}
+
+.text-box1{
+    width: 45%;
+    overflow: hidden;
+    font-size: 20px;
+    padding: 8px 0;
+    margin: 8px 0;
+    border-bottom: 1px solid red;
+}
+.text-box2{
+    width: 50%;
+    overflow: hidden;
+    font-size: 20px;
+    padding: 8px 0;
+    margin: 0 8px;
+    border-bottom: 1px solid red;
+    float: right;
+    margin-top: -51px;
+}
+.text-box3{
+    width: 50%;
+    overflow: hidden;
+    font-size: 20px;
+    padding: 8px 0;
+    margin: 0 8px;
+    border-bottom: 1px solid red;
+    float: right;
+    margin-top: -51px;
+}
+
+.text-box i{
+    width: 100px;
+    float:left;
+    text-align: center;
+    margin-left: -10%;
+} 
+
+.text-box1 i{
+    width: 100px;
+    float:left;
+    text-align: center;
+} 
+.text-box2 i{
+    width: 100px;
+    float:left;
+    text-align: center;
+}
+
+.text-box input{
+    border: none;
+    outline: none;
+    background: none;
+    color: white;
+    font-size: 18px;
+    width: 150px;
+    float: left;
+    margin: 0 10px;
+
+}
+.text-box1 select{
+    border: red;
+    background: none;
+    outline: gray;
+    color: rgb(102, 101, 101);
+    font-size: 18px;
+    width:75%;
+    float: left;
+    margin: 0 10px;
+}
+.text-box1 input{
+    border: none;
+    outline: none;
+    background: none;
+    color: white;
+    font-size: 18px;
+    width: 150px;
+    float: left;
+    margin: 0 10px;
+}
+.text-box2 input{
+    border: none;
+    outline: none;
+    background: none;
+    color: white;
+    font-size: 18px;
+    width: 300px;
+    float: left;
+    margin: 0 10px;
+}
+ label{
+    color:grey;
+    font-size: 10px;
+    
+    
+}
+
+.text-box1 select{
+    border: red;
+    background: none;
+    outline: gray;
+    color: rgb(102, 101, 101);
+    font-size: 18px;
+    width:75%;
+    float: left;
+    margin: 0 10px;
+}
+.text-box .datepicker-input{
+    color: gray;
+    width: 200%;
+
+}
+.text-box2 select{
+    border: red;
+    background: none;
+    outline: gray;
+    color: rgb(102, 101, 101);
+    font-size: 18px;
+    width:75%;
+    float: left;
+    margin: 0 10px;
+    margin-top: 4px;
+}
+
+
+
+.btn{
+    width: 100%;
+    background: red;
+    cursor: pointer;
+    border:2px solid red;
+    color: white;
+    font-size: 1.1em;
+    margin: 12px 0;
+    height: 40px;
+    border-radius: 5px;
+    
+    
+}
+.btn a{
+    text-decoration: none;
+    color: white;
+}
+
+#output{
+    width: auto;
+    height: 150px;
+    
+}
+#br{
+    background: none;
+    color: white;
+    border: none;
+}

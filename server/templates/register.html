@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -31,5 +31,61 @@
 
 </div>
     
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf8">
+  <title>Police registration portal</title>
+  
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/style2.css') }}" >  
+  
+</head>
+<body class="life">  
+    
+<div class="login-box">
+
+    <h1>Police Registration</h1>
+    <form action="/register" method="post">
+
+        
+            
+            
+            
+            
+            
+        <div class="text-box">
+    
+            <input type="text" name="police_id" class="form-control" placeholder="Police id" required>
+    </div>
+    
+     <div class="text-box">
+        
+        <input type="text" name="p_name" class="form-control" placeholder="Full name" required>
+    </div>
+    
+   
+    
+   
+    
+    <div class="text-box">
+        <input type="text" name="station" class="form-control" placeholder="Station" required>
+    </div>
+    <div class="text-box">
+        <input type="text" name="post" class="form-control" placeholder="Post" required>
+    </div>
+    <div class="text-box">
+        <input type="text" name="mobile" class="form-control" placeholder="Mobile" required>
+    </div>
+
+    <div class="text-box">
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
+    </div>
+    <input class="btn" type="submit" value="Sign up" name="sub">
+    </form>
+</div>
+
 </body>
 </html>

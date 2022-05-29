@@ -112,8 +112,8 @@ def gen_frames():
 
 @app.route('/')
 def index():
-    if 'loggedin' in session:
-        return render_template('newcase.html', police_id=session['police_id'])
+    # if 'loggedin' in session:
+    #     return render_template('policehome.html')
     return render_template('index.html')
 
 
@@ -124,7 +124,9 @@ def video_feed():
 
 @app.route('/newcase')
 def newcase():
-    return render_template('newcase.html')    
+    if 'loggedin' in session:
+        return render_template('newcase.html')
+    return redirect('login')        
 
 @app.route('/newcase', methods=['POST'])
 def casedetails():
@@ -153,7 +155,8 @@ def casedetails():
         conn.commit()
  
         flash('Image successfully uploaded and displayed below')
-        return render_template('index.html', filename=filename)
+        # return render_template('index.html', filename=filename)
+        return redirect(url_for('police_home'))
     else:
         flash('Allowed image types are - png, jpg, jpeg, gif')
         return redirect(request.url)
@@ -169,19 +172,20 @@ def train():
         m_image=i[1]
         # print(m_name,m_image)
         image_directory = os.path.join(app.config['UPLOAD_FOLDER'], m_image)
-        print(image_directory)
-
         missing_image = face_recognition.load_image_file(image_directory)
         missing_face_encoding = face_recognition.face_encodings(missing_image)[0]
 
         known_face_encodings.append(missing_face_encoding)
         known_face_names.append(m_name)
-        print("Training"+m_name, m_image)
-    return "Training completed"
+        print("++++++++ Training done for "+m_name+" with image: "+m_image+" ++++++++")
+    flash("Refresh completed.")    
+    return redirect(url_for('policehome'))
 
 
 @app.route('/login',methods = ['GET','POST'])
 def login():
+    if 'loggedin' in session:
+        return redirect(url_for('policehome'))
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
    
     # Check if "username" and "password" POST requests exist (user submitted form)
@@ -205,7 +209,7 @@ def login():
                 session['p_id'] = account['p_id']
                 session['police_id'] = account['police_id']
                 # Redirect to home page
-                return redirect(url_for('index'))
+                return redirect(url_for('policehome'))
             else:
                 # Account doesnt exist or username/password incorrect
                 flash('Incorrect username/password')
@@ -253,7 +257,7 @@ def register():
         # Form is empty... (no POST data)
         flash('Please fill out the form!')
     # Show registration form with message (if any)
-    return render_template('register.html')
+    return render_template('login.html')
     
 @app.route('/logout')
 def logout():
@@ -264,8 +268,20 @@ def logout():
    # Redirect to login page
    return redirect(url_for('login'))
 
-if __name__=='__main__':
-    app.run(debug=True)
 
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0', port=2204, threaded=True)
+@app.route('/police_home')
+def policehome():
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+    cursor.execute("select * from newcases") 
+    data = cursor.fetchall()
+    print(data)
+    if 'loggedin' in session:
+        return render_template ('policehome.html',value=data)
+    return redirect(url_for('login'))
+
+# if __name__=='__main__':
+#     app.run(debug=True)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=2204, threaded=True)

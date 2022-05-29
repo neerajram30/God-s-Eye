@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 
 
@@ -14,4 +14,48 @@
     </body>
 
 
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device=width, initial-scale=1.0">
+    <title>God's Eye Home</title>
+    <link rel="stylesheet"  href= "{{ url_for('static',filename='css/style.css') }}">
+</head>
+<body>
+    
+        <nav class="navbar">  
+
+            <div class="title">
+                <h1>God's Eye</h1>
+            </div>
+            
+             <ul>
+
+                <li><a class="active" href="/">Home</a><li>
+                    <!-- <li><a href="casereg.html">Case </a><li> -->
+                <li><a href="/login">Police Login</a></li>
+                <!-- <li><a href="contactus.html">About</a><li> -->
+                    <li><a href="/video_feed" target="_blank">CCTV</a></li>
+                
+                 </ul>
+    
+       
+                </nav>
+                <div class= "life">
+                    
+                       <video autoplay muted loop id="myVideo">
+                  <source src="{{ url_for('static',filename='img/bgvdo.mp4') }}" type="video/mp4">
+                    </video>
+                </div> 
+
+        </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
 </html>

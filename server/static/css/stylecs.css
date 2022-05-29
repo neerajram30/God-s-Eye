@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=poppins:wght@200;300;400;500;600;700;900&display=swap');
+*
+{
+	margin-left: 0;
+	padding: 0;
+	box-sizing: border-box;
+
+	font-family: 'poppins',sans-serif;
+}
+.contact{
+	position: relative;
+	min-height: 100vh;
+	padding: 50px 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column; 
+	background: url(blood.jpg);
+	background-size: cover;
+}
+.contact .contant{
+	max-width: 800px;
+	text-align: center; 
+}
+.contact .contant h2{
+	font-size:  36px;
+	font-weight: 500px; 
+	color: black;
+}
+.contact .contant p{
+	font-size:  30px;
+	color: black;
+}
+.container
+{	
+	width: 100%;
+	display: flex;
+	margin-left: 30px;
+	align-items: center;
+	margin-top: 30px;
+}
+.container.contactinfo
+{
+	width: 50%;
+	padding: 20px 0;
+	display: flex;
+}
+.container.contactinfo.box
+{
+	position: relative;
+	padding: 20px 0;
+	display: flex;
+}
+.container.contactinfo.box.icon {
+	min-width: 60px;
+	height: 60px;
+	background:"fff";
+	display: flex;
+	justify-content: center;
+	align-items: center; 
+	border-radius: 50%:
+	font-size:30px;   
+
+}  
+.container.contactinfo.box.text
+{
+	display: flex;
+
+	margin-left: 20px
+	font-size: 16px;
+	color: black;
+
+	flex-direction: column;
+	font-weight:300 ;
+
+}
+.container.contactinfo.box.text h3
+{
+	
+	font-weight:500 ;
+	color: #00bcd4;
+
+
+}
+.contactform {
+	width: 50%;
+	padding:100px;
+
+	background:#fff;
+}
+.contactform h2{
+	font-size: 30px;
+	color:#333;
+	font-weight: 400;
+
+}
+.contactform .inputBox{
+	position: relative;
+	width:100%;
+	margin-top: 10px;
+}
+.contactform .inputBox input{
+	width: 100%;
+	padding: 5px 0;
+	font-size: 16px;
+	margin: 10px 0;
+	border: none;
+	border-bottom: 2px solid #333;
+	outline:none;
+}
+.contactform .inputBox input
+.contactform .inputBox textarea
+{
+	width: 100%;
+	padding: 5px 0;
+	font-size: 16px;
+	margin: 10px 0;
+	border: none;
+	border-bottom: 2px solid #333;
+	outline:none;
+}
+.contactform .inputBox span
+{
+position: absolute;
+left: 0;
+padding: 5px 0;
+font-size: 16px;
+margin: 10px 0;
+pointer-events: none;
+transition:0.5s;
+color: #666;
+}
+.contactform .inputBox input:focus~ span,
+.contactform .inputBox input:valid~ span,
+.contactform .inputBox textarea:focus~ span,
+.contactform .inputBox textarea:valid~ span
+{
+	color: #e91e63;
+	font-size: 12px;
+	transform: translate(-20px);
+
+}
+.contactform .inputBox input[type="submit"]
+{
+	width: 100px;
+	background:#8b0000;
+	border: none;
+	cursor: pointer;
+	padding: 10px;
+	font-size: 18px;
+}
+.footer{
+  padding:25px;
+margin-bottom: : 50px;
+  color:white;
+  background-color:#181514;
+  font-weight: bold;
+  text-align: center;
+}
+@media(max-width: 991px){
+.contact
+{
+	padding: 50px;
+}
+.container
+{
+	flex-direction: column;
+
+}
+.container .contactinfo{
+	margin-bottom: 40px;
+
+}
+.container .contactinfo,
+.contactform
+{
+	width: 100%;
+
+
+}

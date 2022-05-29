@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
 <title>Upload and display image using Python Flask and insert to PostgreSQL</title>
@@ -43,6 +43,58 @@
         </p>
     </form>
 </div>
+</div>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf8">
+  <title>Case Registration</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/style2.css') }}">  
+  
+</head>
+<body class="life">  
+<div class="login-box">
+    <h1>Register Case</h1>
+    <form action="/newcase" method="post" enctype="multipart/form-data">
+        
+        <div class="text-box">
+            <input type="text" name="m_name" placeholder="Full name">
+    </div>
+    
+    <div class="text-box">
+        <input type="text" name="location" placeholder="Location">
+    </div>
+
+    <div class="text-box">
+        <input type="text" name="mobile" placeholder="Mobile">
+    </div>
+
+    <div class="text-box">
+        <input type="text" name="age" placeholder="Age">
+    </div>
+    
+    <div class="pic">
+   <input  type="file" name="file" accept="image/*" onchange="loadFile(event)" class="form-control" id="br">
+<img id="output"/>
+<script>
+  var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+  };
+</script>
+  </div>
+<div>
+
+    <input class="btn" type="submit" value="Register">
+
+    </form>
 </div>
 </body>
 </html>

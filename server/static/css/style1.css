@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css');
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins' , sans-serif ;
+    background-image: url(../img/bd.jpg);
+    background-size: cover;
+}
+.login-box{
+    width: 280px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: white;
+}
+.login-box h1{
+    float: left;
+    font-size: 40px;
+    border-bottom: 6px solid red;
+    margin-bottom: 50px;
+    padding: 13px 0;
+}
+.text-box{
+    width: 100%;
+    overflow: hidden;
+    font-size: 20px;
+    padding: 8px 0;
+    margin: 8px 0;
+    border-bottom: 1px solid red;
+}
+.text-box i{
+    width: 26px;
+    float:left;
+    text-align: center;
+} 
+.text-box input{
+    border: none;
+    outline: none;
+    background: none;
+    color: white;
+    font-size: 18px;
+    width: 100px;
+    float: left;
+    margin: 0 10px;
+}
+.text-box select{
+    border: red;
+    background: none;
+    outline: gray;
+    color: rgb(102, 101, 101);
+    font-size: 18px;
+    width:75%;
+    float: left;
+    margin: 0 10px;
+    margin-top: 4px;
+}
+.btn{
+    width: 100%;
+    background: none;
+    cursor: pointer;
+    border:2px solid red;
+    color: white;
+    font-size: 18px;
+    margin: 12px 0;
+}
