@@ -6,6 +6,7 @@
 .container{
  background-color:#060227;
 width: 100%;
+min-height: 100vh;
 
 }
 .police-nav{

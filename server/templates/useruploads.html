@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static',filename='css/policehome.css') }}">
-    <title>Police portal</title>
+    <title>Uploads</title>
 </head>
 <body>
     <div class="container">
@@ -13,12 +13,12 @@
             <div class="p-title">
                 <p>God's eye</p>
             </div>
-            <div class="nav-links">
+            <!-- <div class="nav-links">
                 <div class="btn"><a href="/train">Refresh</a></div> 
                 <a href="/newcase" id="new">NewCase</a>
                 <a href="/results">Results</a>
                 <a href="/userupload">Useruploads</a>
-            </div>
+            </div> -->
             <div class="nav-links">
                
                 <a href="/logout" id="logout">Logout</a>
@@ -26,16 +26,7 @@
         </nav>
       <div>
        <center>
-            <div class="train_msg">
-                {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            {% for message in messages %}
-              <p>{{ message }}</p>
-            {% endfor %}
-          {% endif %}
-        {% endwith %}
-            </div>
-
+            
            <table class="details"> 
                <thead> 
             <tr> 
@@ -43,8 +34,7 @@
                 <th>Name</th>
                 <th>Mobile</th>
                 <th>Location</th>
-                <th>Date</th>
-                <th>Age</th> 
+ 
             </tr> 
             </thead> 
             <tbody> 
@@ -54,9 +44,7 @@
                         <td> {{row[1]}}</td> 
                         
                         <td>{{row[2]}}</td>
-                        <td>{{row[6]}}</td>
-                        <td>{{row[3]}}</td>
-                        <td>{{row[4]}}</td> 
+                        <td>{{row[3]}}</td> 
                     </tr> 
                 {% endfor %} 
             </tbody> 

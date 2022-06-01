@@ -4,6 +4,7 @@ from crypt import methods
 import os
 import re
 from sre_constants import SUCCESS
+from cv2 import split
 from flask import Flask, render_template, Response, request, redirect, url_for, flash, session
 import urllib.request
 import cv2
@@ -19,6 +20,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from ipregistry import IpregistryClient
 import json
 from geopy.geocoders import Nominatim
+import ast
 
 resource = urllib.request.urlopen('https://api.ipregistry.co/?key=tgagdi71afjuyrlq')
 payload = resource.read().decode('utf-8')
@@ -40,7 +42,9 @@ UPLOAD_FOLDER = 'static/uploads/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 known_face_encodings = []
 known_face_names = []
-TOLERANCE = 0.54
+TOLERANCE = 0.6
+
+
 
 
 face_locations = []
@@ -52,6 +56,9 @@ process_this_frame = True
 
 screenshorts=[]
 locations =[]
+
+# screenshort =""
+# location =""
 
 conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER,
                         password=DB_PASS, host=DB_HOST)
@@ -109,20 +116,21 @@ def gen_frames():
                 face_distances = face_recognition.face_distance(
                     known_face_encodings, face_encoding)
                 best_match_index = np.argmin(face_distances)
+                path = 'static/screenshots/'
                 if matches[best_match_index]:
                     name = known_face_names[best_match_index]
-                    num = 0
-                    
-                    path = 'static/screenshots/'
-                    while num < 3:
-                        cv2.imwrite(os.path.join(
-                            path, name+str(num)+'.jpg'), frame)
-                        screenshorts.append(name+str(num)+'.jpg')    
-                        # filename = secure_filename(name+str(num)+'.jpg'.filename)    
-                        # name+str(num)+'.jpg'.save(os.path.join(app.config['path'], filename))
-                        # screenshorts.append(name+str(num)+'.jpg')
-                        locations.append(locname.address)
-                        num = num+1
+                    # num = 0
+                    # while num < 3:
+                    #     cv2.imwrite(os.path.join(
+                    #         path, name+str(num)+'.jpg'), frame)
+                    #     screenshorts.append(name+str(num)+'.jpg')    
+                    #     # filename = secure_filename(name+str(num)+'.jpg'.filename)    
+                    #     # name+str(num)+'.jpg'.save(os.path.join(app.config['path'], filename))
+                    #     # screenshorts.append(name+str(num)+'.jpg')
+                    #     num = num+1
+                    cv2.imwrite(os.path.join(path, name+str(1)+'.jpg'), frame)
+                    locations.append(locname.address)
+                    screenshorts.append(name+str(1)+'.jpg')
                 face_names.append(name)
 
             # Display the results
@@ -158,22 +166,21 @@ def gen_frames():
 def index():
     # if 'loggedin' in session:
     #     return render_template('policehome.html')
-    scr = Remove(screenshorts)
-    print(scr)
-    loc =Remove(locations)
-    print(loc)
-    print(locations)
+    # scr = Remove(screenshorts)
+    # print(scr)
+    # loc =Remove(locations)
+    # print(loc)
+    # print(locations)
+    
     return render_template('index.html')
 
 
 @app.route('/video_feed')
 def video_feed():
     scr = Remove(screenshorts)
-    print(scr)
     loc =Remove(locations)
-    print(loc)
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    cursor.execute(f"INSERT INTO spoted (image, location) VALUES (%s, %s)",(scr,loc))
+    cursor.execute("INSERT INTO spoted (image, location) VALUES (%s,%s)",(scr,loc,))
     conn.commit()
     return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
@@ -212,7 +219,7 @@ def casedetails():
 
         flash('Image successfully uploaded and displayed below')
         # return render_template('index.html', filename=filename)
-        return redirect(url_for('police_home'))
+        return redirect(url_for('policehome'))
     else:
         flash('Allowed image types are - png, jpg, jpeg, gif')
         return redirect(request.url)
@@ -230,8 +237,7 @@ def train():
         # print(m_name,m_image)
         image_directory = os.path.join(app.config['UPLOAD_FOLDER'], m_image)
         missing_image = face_recognition.load_image_file(image_directory)
-        missing_face_encoding = face_recognition.face_encodings(missing_image)[
-            0]
+        missing_face_encoding = face_recognition.face_encodings(missing_image)[0]
 
         known_face_encodings.append(missing_face_encoding)
         known_face_names.append(m_name)
@@ -267,7 +273,7 @@ def login():
                 session['p_id'] = account['p_id']
                 session['police_id'] = account['police_id']
                 # Redirect to home page
-                return redirect(url_for('police_home'))
+                return redirect(url_for('policehome'))
             else:
                 # Account doesnt exist or username/password incorrect
                 flash('Incorrect username/password')
@@ -280,6 +286,8 @@ def login():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    if 'loggedin' in session:
+        return redirect(url_for('policehome'))
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
     # Check if "username", "password" and "email" POST requests exist (user submitted form)
@@ -314,11 +322,12 @@ def register():
                            (police_id, p_name, station, post, mobile, _hashed_password,))
             conn.commit()
             flash('You have successfully registered!')
+            return redirect(url_for('login'))
     elif request.method == 'POST':
         # Form is empty... (no POST data)
         flash('Please fill out the form!')
     # Show registration form with message (if any)
-    return render_template('login.html')
+    return render_template('register.html')
 
 
 @app.route('/logout')
@@ -337,28 +346,74 @@ def policehome():
 
     cursor.execute("select * from newcases")
     data = cursor.fetchall()
+    
     if 'loggedin' in session:
         return render_template('policehome.html', value=data)
     return redirect(url_for('login'))
+
 @app.route('/results')
 def results():
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     cursor.execute("select * from spoted")
     data = cursor.fetchall()
+    print("data= ",data)
     for x in data:
         img=x[1]
         loc=x[2]
-        
-    img_data=json.loads(img)
-    loc_data=json.loads(loc)
+    dictionary =eval(img)
+    dictionary1 =eval(loc)
+    print(dictionary1)
+    final_data =np.hstack((dictionary,dictionary1))
+    f_d = Remove(final_data)
     
-    return render_template('results.html',image =img, location=loc ,value=data)
+    # loc_data=json.loads(loc)
+        
+    return render_template('results.html', value=data)
+@app.route('/user')
+def userrend():
+    return render_template('user.html')
 
 
 
-if __name__=='__main__':
-    app.run(debug=True)
+@app.route('/user' ,methods=['POST','GET'])
+def user():
+    if request.method == 'POST':
+        cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        u_name = request.form['u_name']
+        phone = request.form['phone']
+        location = request.form['location']
+        file = request.files['file']
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        if file.filename == '':
+            flash('No image selected for uploading')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        #print('upload_image filename: ' + filename)
+            cursor.execute("INSERT INTO users (name,mobile,location,file) VALUES (%s,%s,%s,%s)",
+                       (u_name, phone, location, filename,))
+            conn.commit()
+
+            flash('Image successfully uploaded and displayed below')
+        # return render_template('index.html', filename=filename)
+            return redirect(url_for('user'))
+
+@app.route('/userupload')
+def userupload():
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    cursor.execute("select * from users")
+    data = cursor.fetchall()
+    return render_template('useruploads.html', value=data)
 
 
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0', port=2204, threaded=True)
+
+
+# if __name__=='__main__':
+#     app.run(debug=True)
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=2204, threaded=True)

@@ -9,34 +9,19 @@
 <body>
     <table class="details"> 
         <thead> 
-     <tr> 
-          
-         <th>Name</th>
-         <th>Mobile</th> 
-     </tr> 
+     
      </thead> 
      <tbody> 
-         <!-- {% for img in image %}  
-          {% for loc in location %}
-             <tr> 
-                 <td>{{img}}</td> 
-                 <td>{{y}}</td>
-                 
-             </tr>
-            
-          {% endfor %} 
-         {% endfor %}  -->
-
-         <!-- {% for x in value %}  
-          {% for y in x %}
-             <tr> 
-                 <td>{{y}}</td> 
-                 <td>{{y}}</td>
-             </tr> 
-          {% endfor %} 
-         {% endfor %} -->
-
-
+         
+         {% for row in value %}
+         <!-- {% for i in row[1] %} -->
+         <tr>
+             <td>{{row}}</td>
+         </tr>
+         <!-- {% endfor %} -->
+        
+         {% endfor %}
+       
 
      </tbody> 
  </table> 

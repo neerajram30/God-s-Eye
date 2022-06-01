@@ -19,40 +19,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://kit.fontawesome.com/b6f08bb760.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device=width, initial-scale=1.0">
     <title>God's Eye Home</title>
     <link rel="stylesheet"  href= "{{ url_for('static',filename='css/style.css') }}">
 </head>
 <body>
-    
-        <nav class="navbar">  
-
-            <div class="title">
-                <h1>God's Eye</h1>
-            </div>
+    <nav>
+        <div><h1>God,s eye</h1></div>
+        <div class="nav-links">
+            <a href="/login" target="_blank">Police</a>
+            <a href="/user" target="_blank">User</a>
+            <a href="/video_feed" target="_blank">CCTV</a>
+        </div>
+        
+    </nav>
+    <div>
+        <div class= "life">
             
-             <ul>
-
-                <li><a class="active" href="/">Home</a><li>
-                    <!-- <li><a href="casereg.html">Case </a><li> -->
-                <li><a href="/login">Police Login</a></li>
-                <!-- <li><a href="contactus.html">About</a><li> -->
-                    <li><a href="/video_feed" target="_blank">CCTV</a></li>
-                
-                 </ul>
-    
-       
-                </nav>
-                <div class= "life">
-                    
-                       <video autoplay muted loop id="myVideo">
-                  <source src="{{ url_for('static',filename='img/bgvdo.mp4') }}" type="video/mp4">
-                    </video>
-                </div> 
-
-        </div>
-        </div>
+            
+            <video autoplay muted loop id="myVideo">
+                <source src="{{ url_for('static',filename='img/bgvdo.mp4') }}" type="video/mp4"> 
+            </video>
+            
+            
+        </div> 
     </div>
 
 </div>
