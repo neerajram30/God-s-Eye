@@ -29,7 +29,6 @@ geoLoc = Nominatim(user_agent="GetLoc")
 app = Flask(__name__)
 app.secret_key = "super secret key"
 
-
 DB_HOST = "localhost"
 DB_NAME = "final_project"
 DB_USER = "postgres"
@@ -176,6 +175,8 @@ def index():
 def video_feed():
     scr = Remove(screenshorts)
     loc =Remove(locations)
+    print("--------------------------",scr)
+    print("--------------------------",loc)
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     cursor.execute("INSERT INTO spoted (image, location) VALUES (%s,%s)",(scr,loc,))
     conn.commit()
@@ -354,14 +355,14 @@ def results():
     cursor.execute("select * from spoted")
     data = cursor.fetchall()
     print("data= ",data)
-    for x in data:
-        img=x[1]
-        loc=x[2]
-    dictionary =eval(img)
-    dictionary1 =eval(loc)
-    print(dictionary1)
-    final_data =np.hstack((dictionary,dictionary1))
-    f_d = Remove(final_data)
+    # for x in data:
+    #     img=x[1]
+    #     loc=x[2]
+    # dictionary =eval(img)
+    # dictionary1 =eval(loc)
+    # print(dictionary1)
+    # final_data =np.hstack((dictionary,dictionary1))
+    # f_d = Remove(final_data)
     
     # loc_data=json.loads(loc)
         
@@ -408,9 +409,9 @@ def userupload():
 
 
 
-# if __name__=='__main__':
-#     app.run(debug=True)
+if __name__=='__main__':
+    app.run(debug=True)
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=2204, threaded=True)
+# if __name__ == '__main__':
+#     app.run(host='0.0.0.0', port=2204, threaded=True)

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href= "{{ url_for('static',filename='css/results.css') }}">
     <title>Results</title>
 </head>
 <body>
@@ -11,14 +12,19 @@
         <thead> 
      
      </thead> 
-     <tbody> 
+     <tbody class="resultbody"> 
          
          {% for row in value %}
-         <!-- {% for i in row[1] %} -->
+         {% for i in row[1] %}
+         {% for j in row[2] %}
          <tr>
-             <td>{{row}}</td>
+             
+             <td class="spotedimage" ><image src="{{url_for('static',filename = 'screenshots/')}}{{i}}" width="25%"></image></td>
+             
+             <td>{{j}}</td>
          </tr>
-         <!-- {% endfor %} -->
+         {% endfor %}
+         {% endfor %}
         
          {% endfor %}
        
