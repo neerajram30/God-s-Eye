@@ -1,5 +1,3 @@
-
-
 from crypt import methods
 import os
 import re
@@ -10,7 +8,6 @@ import urllib.request
 import cv2
 import face_recognition
 import numpy as np
-import pickle
 from face_recognition.face_recognition_cli import image_files_in_folder
 from werkzeug.utils import secure_filename
 import psycopg2
