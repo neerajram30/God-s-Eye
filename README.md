@@ -1,10 +1,10 @@
-# Product Name
-> Short blurb about what your product does.
+# GOD,S eye
+<!-- > Short blurb about what your product does.
 [![NPM Version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
-[![Downloads Stats][npm-downloads]][npm-url]
+[![Downloads Stats][npm-downloads]][npm-url] -->
 
-One to two paragraph statement about your product and what it does.
+God,s eye is a final year project done by students of college of engineering cherthala. The main purpose of this project is Finding Missing Person using AI and image processing.
 
 ![](header.png)
 
@@ -13,20 +13,32 @@ One to two paragraph statement about your product and what it does.
 OS X & Linux:
 
 ```sh
-npm install my-crazy-module --save
-```
+cat requirements.txt
 
-Windows:
+```
+From the requirements install all the libraries one by one or install all by 
+
+```sh
+pip install -r requirements.txt
+
+```
+We recomment you to install libraries one by one. This is the best practice.
+<!-- Windows:
 
 ```sh
 edit autoexec.bat
-```
+``` -->
 
 ## Usage example
 
-A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
+For running this app on production environment you can you can use command 
 
-_For more examples and usage, please refer to the [Wiki][wiki]._
+```sh
+python3 app.py
+
+```
+
+<!-- _For more examples and usage, please refer to the [Wiki][wiki]._
 
 ## Development setup
 
@@ -69,9 +81,9 @@ Distributed under the XYZ license. See ``LICENSE`` for more information.
 5. Create a new Pull Request
 
 <!-- Markdown link & img dfn's -->
-[npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square
+<!-- [npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/datadog-metrics
 [npm-downloads]: https://img.shields.io/npm/dm/datadog-metrics.svg?style=flat-square
 [travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
 [travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
-[wiki]: https://github.com/yourname/yourproject/wiki
+[wiki]: https://github.com/yourname/yourproject/wiki --> 
