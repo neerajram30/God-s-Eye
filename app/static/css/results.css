@@ -1,4 +1,7 @@
-.resultbody{
-    background-color: aquamarine;
-}
 
+
+.resultcontainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;    
+}

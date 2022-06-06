@@ -12,7 +12,7 @@ from face_recognition.face_recognition_cli import image_files_in_folder
 from werkzeug.utils import secure_filename
 import psycopg2
 import psycopg2.extras
-from datetime import date
+from datetime import date,datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from ipregistry import IpregistryClient
 import json
@@ -52,7 +52,8 @@ process_this_frame = True
 
 screenshorts=[]
 locations =[]
-
+names =[]
+dates=[]
 # screenshort =""
 # location =""
 
@@ -127,6 +128,10 @@ def gen_frames():
                     cv2.imwrite(os.path.join(path, name+str(1)+'.jpg'), frame)
                     locations.append(locname.address)
                     screenshorts.append(name+str(1)+'.jpg')
+                    names.append(name)
+                    now=datetime.now()
+                    dt_str=now.strftime("%d/%m/%Y %H:%M:%S")
+                    dates.append(dt_str)
                 face_names.append(name)
 
             # Display the results
@@ -175,10 +180,13 @@ def index():
 def video_feed():
     scr = Remove(screenshorts)
     loc =Remove(locations)
+    name =Remove(names)
+    date =Remove(dates)
+
     print("--------------------------",scr)
     print("--------------------------",loc)
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    cursor.execute("INSERT INTO spoted (image, location) VALUES (%s,%s)",(scr,loc,))
+    cursor.execute("INSERT INTO spoted (image, location, name, date) VALUES (%s,%s,%s,%s)",(scr,loc,name,date))
     conn.commit()
     return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 

@@ -17,12 +17,20 @@
          {% for row in value %}
          {% for i in row[1] %}
          {% for j in row[2] %}
+         {% for k in row[3] %}
+         {% for l in row[4] %}
          <tr>
              
              <td class="spotedimage" ><image src="{{url_for('static',filename = 'screenshots/')}}{{i}}" width="25%"></image></td>
              
              <td>{{j}}</td>
+             <td>{{k}}</td>
+             <td>{{l}}</td>
+
          </tr>
+         {% endfor %}
+         {% endfor %}
+
          {% endfor %}
          {% endfor %}
         
