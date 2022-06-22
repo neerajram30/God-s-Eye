@@ -1,4 +1,5 @@
 from crypt import methods
+from dotenv import load_dotenv
 import os
 import re
 from sre_constants import SUCCESS
@@ -19,7 +20,9 @@ import json
 from geopy.geocoders import Nominatim
 import ast
 
-resource = urllib.request.urlopen('https://api.ipregistry.co/?key=tgagdi71afjuyrlq')
+load_dotenv()
+IP_REGISTRY_KEY = os.getenv('IP_REGISTRY_KEY')
+resource = urllib.request.urlopen(IP_REGISTRY_KEY)
 payload = resource.read().decode('utf-8')
 
 geoLoc = Nominatim(user_agent="GetLoc")
@@ -27,12 +30,17 @@ geoLoc = Nominatim(user_agent="GetLoc")
 
 
 app = Flask(__name__)
-app.secret_key = "super secret key"
+app.secret_key = os.getenv("APP_SECRET")
 
-DB_HOST = "localhost"
-DB_NAME = "final_project"
-DB_USER = "postgres"
-DB_PASS = "12345"
+DB_HOST = os.getenv("DB_HOST")
+DB_NAME = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
+DB_PASS = os.getenv("DB_PASS")
+
+# DB_HOST = "localhost"
+# DB_NAME = "final_project"
+# DB_USER = "postgres"
+# DB_PASS = "12345"
 
 UPLOAD_FOLDER = 'static/uploads/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -417,9 +425,9 @@ def userupload():
 
 
 
-if __name__=='__main__':
-    app.run(debug=True)
+# if __name__=='__main__':
+#     app.run(debug=True)
 
 
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0', port=2204, threaded=True)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=2204, threaded=True)
