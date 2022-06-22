@@ -60,12 +60,17 @@ python3 app.py
 * [OpenCV](https://opencv.org/)
 * [NumPy](https://numpy.org/)
 
-## **Contact**
+## **Contact Us**
 
-<a href='https://www.linkedin.com/in/neeraj-m-r-173b64216/'>![image]({https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white})
-</a>
+<!-- <a href='https://www.linkedin.com/in/neeraj-m-r-173b64216/'>![image]({https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white})
+</a> -->
+</br>
+<div align="center">
+
+[![Linkedin profile][Linkedin]][linkedin-url]
 
 
+</div>
 <!-- _For more examples and usage, please refer to the [Wiki][wiki]._
 
 ## Development setup
@@ -114,4 +119,7 @@ Distributed under the XYZ license. See ``LICENSE`` for more information.
 [npm-downloads]: https://img.shields.io/npm/dm/datadog-metrics.svg?style=flat-square
 [travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
 [travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
-[wiki]: https://github.com/yourname/yourproject/wiki --> 
+[wiki]: https://github.com/yourname/yourproject/wiki -->
+
+[Linkedin]: https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
+[linkedin-url]: https://www.linkedin.com/in/neeraj-m-r-173b64216/
