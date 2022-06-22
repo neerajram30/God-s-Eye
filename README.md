@@ -1,14 +1,21 @@
-# GOD,S eye
+# **GOD,S EYE**
 <!-- > Short blurb about what your product does.
 [![NPM Version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
 [![Downloads Stats][npm-downloads]][npm-url] -->
 
-God,s eye is a final year project done by students of college of engineering cherthala. The main purpose of this project is Finding Missing Person using AI and image processing.
+God's eye is a final year project done by students of college of engineering cherthala. The main purpose of this project is Finding Missing Person using AI and image processing.
 
 ![](header.png)
 
-## Installation
+## **Installation**
+
+Clone this respositor using the command 
+
+```sh
+git clone https://github.com/neerajram30/God-s-Eye.git
+
+```
 
 OS X & Linux:
 
@@ -29,7 +36,7 @@ We recomment you to install libraries one by one. This is the best practice.
 edit autoexec.bat
 ``` -->
 
-## Usage example
+## **Usage example**
 
 For running this app on production environment you can you can use command 
 
@@ -37,6 +44,27 @@ For running this app on production environment you can you can use command
 python3 app.py
 
 ```
+
+### Built With
+
+* [Python](https://www.python.org/)
+* [Flask](https://flask.palletsprojects.com/en/2.1.x/)
+* [Postgress DB](https://www.postgresql.org/)
+* [VS code](https://code.visualstudio.com/)
+
+
+### Libraries Used
+
+* [Face Recognition](https://face-recognition.readthedocs.io/en/latest/readme.html)
+* [Dlib](http://dlib.net/)
+* [OpenCV](https://opencv.org/)
+* [NumPy](https://numpy.org/)
+
+## **Contact**
+
+<a href='https://www.linkedin.com/in/neeraj-m-r-173b64216/'>![image]({https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white})
+</a>
+
 
 <!-- _For more examples and usage, please refer to the [Wiki][wiki]._
 
