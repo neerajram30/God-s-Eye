@@ -62,23 +62,23 @@
     <form action="/newcase" method="post" enctype="multipart/form-data">
         
         <div class="text-box">
-            <input type="text" name="m_name" placeholder="Full name">
+            <input type="text" name="m_name" placeholder="Full name" required>
     </div>
     
     <div class="text-box">
-        <input type="text" name="location" placeholder="Location">
+        <input type="text" name="location" placeholder="Location" required>
     </div>
 
     <div class="text-box">
-        <input type="text" name="mobile" placeholder="Mobile">
+        <input type="text" name="mobile" placeholder="Mobile" pattern="[7-9]{1}[0-9]{9}" required>
     </div>
 
     <div class="text-box">
-        <input type="text" name="age" placeholder="Age">
+        <input type="text" name="age" placeholder="Age" required>
     </div>
     
     <div class="pic">
-   <input  type="file" name="file" accept="image/*" onchange="loadFile(event)" class="form-control" id="br">
+   <input  type="file" name="file" accept="image/*" onchange="loadFile(event)" class="form-control" required id="br">
 <img id="output"/>
 <script>
   var loadFile = function(event) {

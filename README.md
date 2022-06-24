@@ -4,9 +4,16 @@
 [![Build Status][travis-image]][travis-url]
 [![Downloads Stats][npm-downloads]][npm-url] -->
 
-God's eye is a final year project done by students of college of engineering cherthala. The main purpose of this project is Finding Missing Person using AI and image processing.
+God's eye is the final year project done by a group of 4 CSE students of COLLEGE OF ENGINEERING CHERTHALA. The main purpose of this project is Finding Missing Person using AI and image processing.
 
-![](header.png)
+<!-- ![](header.png) -->
+## **Group Members**
+
+* Anandhakrishnan A   
+* Aswin M M           
+* Aswin S 
+* Neeraj M R 
+
 
 ## **Installation**
 
@@ -17,7 +24,7 @@ git clone https://github.com/neerajram30/God-s-Eye.git
 
 ```
 
-OS X & Linux:
+Ubuntu:
 
 ```sh
 cat requirements.txt
@@ -38,8 +45,19 @@ edit autoexec.bat
 
 ## **Usage example**
 
-For running this app on production environment you can you can use command 
+For running this app on development  environment you can uncomment this code  
 
+```sh
+if __name__=='__main__':
+    app.run(debug=True)
+```
+For running this app on production environment you can uncomment this code  
+
+```sh
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=2204, threaded=True)
+```
+For running this application on both product and development environment you can use this command
 ```sh
 python3 app.py
 

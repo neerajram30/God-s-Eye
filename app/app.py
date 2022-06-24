@@ -80,6 +80,10 @@ def allowed_file(filename):
 camera = cv2.VideoCapture(0)
 
 
+def verifyImage():
+    
+    return 0
+
 def Remove(duplicate):
     final_list = []
     for num in duplicate:
@@ -138,7 +142,7 @@ def gen_frames():
                     screenshorts.append(name+str(1)+'.jpg')
                     names.append(name)
                     now=datetime.now()
-                    dt_str=now.strftime("%d/%m/%Y %H:%M:%S")
+                    dt_str=now.strftime("%d/%m/%Y")
                     dates.append(dt_str)
                 face_names.append(name)
 
@@ -417,6 +421,7 @@ def user():
 
 @app.route('/userupload')
 def userupload():
+    match = verifyImage()
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     cursor.execute("select * from users")
     data = cursor.fetchall()
