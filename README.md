@@ -9,10 +9,10 @@ God's eye is the final year project done by a group of 4 CSE students of COLLEGE
 <!-- ![](header.png) -->
 ## **Group Members**
 
-* Anandhakrishnan A   
-* Aswin M M           
-* Aswin S 
-* Neeraj M R 
+* [Anandhakrishnan A](https://www.linkedin.com/in/ananthakrishnan-a-280ab9214/)
+* [Aswin M M]           
+* [Aswin S](https://www.linkedin.com/in/aswin-shaji-654a6a1bb/) 
+* [Neeraj M R](https://www.linkedin.com/in/neeraj-m-r-173b64216/)
 
 
 ## **Installation**
