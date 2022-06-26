@@ -80,10 +80,16 @@ def allowed_file(filename):
 camera = cv2.VideoCapture(0)
 
 
-def verifyImage():
-    
-    return 0
-
+# def verifyImage(cases):
+#     train_images = []
+#     known_face =[]
+#     for i in cases:
+#         train_images.append(i[5])
+#         known_face.append(i[1])
+#         face_locations = face_recognition.face_locations(rgb_small_frame)
+#         face_encodings = face_recognition.face_encodings(rgb_small_frame)
+#         print(face_encodings)
+#     return train_images+known_face
 def Remove(duplicate):
     final_list = []
     for num in duplicate:
@@ -421,14 +427,69 @@ def user():
 
 @app.route('/userupload')
 def userupload():
-    match = verifyImage()
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    # cursor.execute("select * from newcases")
+    # cases = cursor.fetchall()
+    # match = verifyImage(cases)
+    # print(match)
     cursor.execute("select * from users")
     data = cursor.fetchall()
     return render_template('useruploads.html', value=data)
 
 
+@app.route('/admin', methods=['POST','GET'])
+def admin():
+    if 'admin-loggedin' in session:
+        return redirect(url_for('adminhome'))
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
+    # Check if "username" and "password" POST requests exist (user submitted form)
+    if request.method == 'POST' and 'a_name' in request.form and 'password' in request.form:
+        a_name = request.form['a_name']
+        password = request.form['password']
+
+        # Check if account exists using MySQL
+        cursor.execute(
+            'SELECT * FROM admin WHERE a_name = %s', (a_name,))
+        # Fetch one record and return result
+        account = cursor.fetchone()
+
+        if account:
+            password_rs = account['password']
+            # If account exists in users table in out database
+            if (password_rs == password):
+                # Create session data, we can access this data in other routes
+                session['admin-loggedin'] = True
+                session['a_name'] = account['a_name']
+                # Redirect to home page
+                return redirect(url_for('adminhome'))
+            else:
+                # Account doesnt exist or username/password incorrect
+                flash('Incorrect username/password')
+        else:
+            # Account doesnt exist or username/password incorrect
+            flash('Incorrect user credentials')
+    
+    return render_template('admin.html')
+
+@app.route('/adminhome')
+def adminhome():
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+    cursor.execute("select * from newcases")
+    data = cursor.fetchall()
+    
+    if 'admin-loggedin' in session:
+        return render_template('adminhome.html', value=data)
+    return redirect(url_for('admin'))
+
+@app.route('/adminlogout')
+def adminlogout():
+    # Remove session data, this will log the user out
+    session.pop('admin-loggedin', None)
+    session.pop('a_name', None)
+    
+    return redirect(url_for('admin'))
 
 if __name__=='__main__':
     app.run(debug=True)
