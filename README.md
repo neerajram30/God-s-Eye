@@ -4,7 +4,7 @@
 [![Build Status][travis-image]][travis-url]
 [![Downloads Stats][npm-downloads]][npm-url] -->
 
-God's eye is the final year project done by a group of 4 CSE students of COLLEGE OF ENGINEERING CHERTHALA. The main purpose of this project is Finding Missing Person using AI and image processing.
+<!-- God's eye is the final year project done by a group of 4 CSE students of COLLEGE OF ENGINEERING CHERTHALA. The main purpose of this project is Finding Missing Person using AI and image processing. -->
 
 <!-- ![](header.png) -->
 ## **Group Members**
