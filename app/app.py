@@ -19,23 +19,24 @@ from ipregistry import IpregistryClient
 import json
 from geopy.geocoders import Nominatim
 import ast
+from db import conn
 
 load_dotenv()
-IP_REGISTRY_KEY = os.getenv('IP_REGISTRY_KEY')
-resource = urllib.request.urlopen(IP_REGISTRY_KEY)
-payload = resource.read().decode('utf-8')
+# IP_REGISTRY_KEY = os.getenv('IP_REGISTRY_KEY')
+# resource = urllib.request.urlopen(IP_REGISTRY_KEY)
+# payload = resource.read().decode('utf-8')
 
-geoLoc = Nominatim(user_agent="GetLoc")
+# geoLoc = Nominatim(user_agent="GetLoc")
 
 
 
 app = Flask(__name__)
 app.secret_key = os.getenv("APP_SECRET")
 
-DB_HOST = os.getenv("DB_HOST")
-DB_NAME = os.getenv("DB_NAME")
-DB_USER = os.getenv("DB_USER")
-DB_PASS = os.getenv("DB_PASS")
+# DB_HOST = os.getenv("DB_HOST")
+# DB_NAME = os.getenv("DB_NAME")
+# DB_USER = os.getenv("DB_USER")
+# DB_PASS = os.getenv("DB_PASS")
 
 # DB_HOST = "localhost"
 # DB_NAME = "final_project"
@@ -47,7 +48,6 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 known_face_encodings = []
 known_face_names = []
 TOLERANCE = 0.6
-
 
 
 
@@ -65,12 +65,10 @@ dates=[]
 # screenshort =""
 # location =""
 
-conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER,
-                        password=DB_PASS, host=DB_HOST)
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 if(conn):
-    print("connection established")
+    print("Database set up completed and connection established succesfully")
 
 
 def allowed_file(filename):
@@ -98,11 +96,11 @@ def Remove(duplicate):
     return final_list
 
 def gen_frames():
-    latitude = json.loads(payload)['location']['latitude']
-    longitude = json.loads(payload)['location']['longitude']
-    la=str(latitude)
-    lo=str(longitude)
-    locname = geoLoc.reverse(la+','+lo)
+    # latitude = json.loads(payload)['location']['latitude']
+    # longitude = json.loads(payload)['location']['longitude']
+    # la=str(latitude)
+    # lo=str(longitude)
+    # locname = geoLoc.reverse(la+','+lo)
     
     while True:
         success, frame = camera.read()
@@ -144,7 +142,7 @@ def gen_frames():
                     #     # screenshorts.append(name+str(num)+'.jpg')
                     #     num = num+1
                     cv2.imwrite(os.path.join(path, name+str(1)+'.jpg'), frame)
-                    locations.append(locname.address)
+                    # locations.append(locname.address)
                     screenshorts.append(name+str(1)+'.jpg')
                     names.append(name)
                     now=datetime.now()
@@ -294,7 +292,7 @@ def login():
             if check_password_hash(password_rs, password):
                 # Create session data, we can access this data in other routes
                 session['loggedin'] = True
-                session['p_id'] = account['p_id']
+                session['id'] = account['id']
                 session['police_id'] = account['police_id']
                 # Redirect to home page
                 return redirect(url_for('policehome'))
@@ -325,7 +323,7 @@ def register():
         password = request.form['password']
 
         _hashed_password = generate_password_hash(password)
-
+        print(_hashed_password)
         # Check if account exists using MySQL
         cursor.execute(
             'SELECT * FROM police WHERE police_id = %s', (police_id,))
@@ -342,11 +340,15 @@ def register():
         #     flash('Please fill out the form!')
         else:
             # Account doesnt exists and the form data is valid, now insert new account into users table
-            cursor.execute("INSERT INTO police (police_id, p_name, station, post, mobile, password) VALUES (%s,%s,%s,%s,%s,%s)",
+            try:
+
+                cursor.execute("INSERT INTO police (police_id, p_name, station, post, mobile, password) VALUES (%s,%s,%s,%s,%s,%s)",
                            (police_id, p_name, station, post, mobile, _hashed_password,))
-            conn.commit()
-            flash('You have successfully registered!')
-            return redirect(url_for('login'))
+                conn.commit()
+                flash('You have successfully registered!')
+                return redirect(url_for('login'))
+            except (Exception, psycopg2.DatabaseError) as error:
+                print('error is --------------'+error)
     elif request.method == 'POST':
         # Form is empty... (no POST data)
         flash('Please fill out the form!')
@@ -491,9 +493,10 @@ def adminlogout():
     
     return redirect(url_for('admin'))
 
-if __name__=='__main__':
-    app.run(debug=True)
+# if __name__=='__main__':
+    
+#     app.run(debug=True)
 
 
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0', port=2204, threaded=True)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=2204, threaded=True)
