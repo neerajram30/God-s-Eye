@@ -13,6 +13,11 @@
 * [Aswin S](https://www.linkedin.com/in/aswin-shaji-654a6a1bb/) 
 * [Neeraj M R](https://www.linkedin.com/in/neeraj-m-r-173b64216/)
 -->
+## **Prerequisite**
+1) Python3
+2) Dlib
+3) Postgressql RDMS
+4) Pgadmin4 (not mandatory)
 
 ## **Installation**
 
@@ -35,31 +40,48 @@ From the requirements install all the libraries one by one or install all by
 pip install -r requirements.txt
 
 ```
-We recomment you to install libraries one by one. This is the best practice.
 <!-- Windows:
 
 ```sh
 edit autoexec.bat
 ``` -->
+## **Configuration**
+
+Create .env in root directory and configure it to files. Replace the fields with your credentials
+
+```sh
+DB_HOST     = "YOUR HOST NAME"
+DB_NAME     = "YOUR DB NAME"
+DB_USER     = "YOUR DB USER NAME"
+DB_PASS     = "YOUR DB PASSWORD"
+APP_SECRET  = "APP PASSWORD"
+```
+
 
 ## **Usage example**
 
 For running this app on development  environment you can uncomment this code  
 
-```sh
+```py
 if __name__=='__main__':
     app.run(debug=True)
 ```
 For running this app on production environment you can uncomment this code  
 
-```sh
+```py
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=2204, threaded=True)
 ```
+For creating database tables run command:
+
+```sh
+python3 createTables.py
+```
+
+
 For running this application on both product and development environment you can use this command
 ```sh
 python3 app.py
-
 ```
 
 ### Built With
