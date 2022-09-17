@@ -66,7 +66,7 @@ For running this app on development  environment you can uncomment this code
 if __name__=='__main__':
     app.run(debug=True)
 ```
-For running this app on production environment you can uncomment this code  
+For running this app on production environment you can uncomment this code, the CCTV will only open when this option is enabled.
 
 ```py
 if __name__ == '__main__':
